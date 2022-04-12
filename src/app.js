@@ -32,24 +32,18 @@ var cancelBtnVari = document.querySelector('.CancelButton')
 var saveBtnVari = document.querySelector('.SaveButton')
 const textAreaVar = document.querySelector('.NoteTaker')
 
+
 function NoteTakeCreate(evt) {
   if (evt.target.localName === "i") {
-    writeNoteArea.insertAdjacentHTML('afterbegin', TextArea)
-    writeNoteArea.insertAdjacentHTML('afterbegin', cancelBtn)
-    writeNoteArea.insertAdjacentHTML('afterbegin', saveBtn)
-    cancelBtnVari = document.querySelector('.CancelButton')
+    if (writeNoteArea.innerText == ''){
+      writeNoteArea.insertAdjacentHTML('afterbegin', TextArea)
+      writeNoteArea.insertAdjacentHTML('afterbegin', cancelBtn)
+      writeNoteArea.insertAdjacentHTML('afterbegin', saveBtn)
+      cancelBtnVari = document.querySelector('.CancelButton')
+    }
   }
 }
 iconsClass.addEventListener('click', NoteTakeCreate)
-
-
-
-//function CancelNote() {
-  //text = document.getElementsByClassName("NoteTaker")
-  //text.remove()
-  //(writeNoteArea.firstChild.cancelBtn('click'))
-//}
-//cancelBtnVari.addEventListener('click', CancelNote)
 
 function CancelNote() {
   var text = document.querySelector('.NoteTaker')
@@ -79,6 +73,8 @@ function SaveNoteArray() {
     id: id
   }
   notes.push(note)
+  const noteList = document.querySelector('.notes-list')
+  noteList.insertAdjacentHTML("afterbegin", Title_Note)
   CancelNote()
 }
 
