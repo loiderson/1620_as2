@@ -107,9 +107,9 @@ function CloseNote() {
 
 
 function DarkenThemeTog() {
-  const darkenTheme = document.querySelector(".light-theme")
+  const darkenTheme = document.querySelector('.main-container')
   darkenTheme.classList.toggle("dark-theme")
 }
 
-var darkenButton = document.querySelector(".theme-toggle")
+let darkenButton = document.querySelector(".theme-toggle")
 darkenButton.addEventListener('change', DarkenThemeTog)
