@@ -20,7 +20,7 @@ const cancelBtn = `
 `
 
 const closeBtn = `
-<button class="CloseButton" type="button">
+<button class="CloseButton" onclick="CloseNote()" type="button">
   Close
 </button>
 `
@@ -31,6 +31,9 @@ const writeNoteArea = document.querySelector('.write-note-area')
 var cancelBtnVari = document.querySelector('.CancelButton')
 var saveBtnVari = document.querySelector('.SaveButton')
 const textAreaVar = document.querySelector('.NoteTaker')
+let noteList = document.querySelector('.notes-list')
+const readNoteArea = document.querySelector('.read-note-area')
+var closeBtnVari = document.querySelector('.CloseButton')
 
 
 function NoteTakeCreate(evt) {
@@ -64,7 +67,7 @@ function SaveNoteArray() {
     Title_Note = StringSplit[0]
   }
   StringSplit.shift()
-  let body = StringSplit.join(' ')
+  let body = StringSplit.join('\n')
   let id = notes.length + 1
 
   let note = {
@@ -74,9 +77,33 @@ function SaveNoteArray() {
   }
   notes.push(note)
   const noteList = document.querySelector('.notes-list')
-  noteList.insertAdjacentHTML("afterbegin", Title_Note)
+  noteList.insertAdjacentHTML("afterbegin", "<li onclick=ReadNote("+id+")>"+Title_Note+"</li>")
   CancelNote()
 }
+
+function ReadNote(id) {
+  //console.log(id)
+  //console.log(notes[id - 1])
+  let area = `
+  <textarea class="NoteTaker" rows="35" cols="50">`+ notes[id - 1]["title"]+"\n"+notes[id - 1]["noteBody"]+`</textarea>
+  `
+  //let noteList = document.querySelector('.notes-list')
+  if (readNoteArea.innerText == "") {
+    readNoteArea.insertAdjacentHTML('afterbegin', area)
+    readNoteArea.insertAdjacentHTML('afterbegin', closeBtn)
+  }
+}
+
+//noteList.addEventListener('click', ReadNote)
+
+function CloseNote() {
+  var text = document.querySelector('.NoteTaker')
+  text.parentElement.removeChild(text)
+  var closeBtnVari = document.querySelector('.CloseButton')
+  closeBtnVari.parentElement.removeChild(closeBtnVari)
+}
+
+
 
 
 //function DarkThemeTog() {
